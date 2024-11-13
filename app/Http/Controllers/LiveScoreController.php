@@ -33,7 +33,7 @@ class LiveScoreController extends Controller
             }
 
             // Eski maçları sil
-            Score::where('match_time', '<=', now())->delete();
+            LiveScore::where('match_time', '<=', now())->delete();
 
             foreach ($scoresData['response'] as $match) {
                 LiveScore::updateOrCreate(
