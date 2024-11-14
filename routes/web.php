@@ -11,7 +11,11 @@ Route::get('/fetch-scores', [LiveScoreController::class, 'fetchScores']);
 Route::get('/superlig-2023', [ScoreController::class, 'showSuperLig2023Scores']);
 Route::get('/fetch-superlig-2023', [ScoreController::class, 'fetchSuperLig2023Scores']);
 
-// Round'ları listeleyen route
+
+// Ana sayfadan sezon ve lig seçimi yaparak round'ları listeleyen route
+Route::get('/rounds', [MatchController::class, 'selectSeasonAndLeague'])->name('rounds.select');
+
+// Sezon ve lig seçimine göre round'ları listeleyen route
 Route::get('/season/{season}/league/{league}/rounds', [MatchController::class, 'getRounds'])->name('rounds');
 
 // Belirli bir round'un maçlarını listeleyen route

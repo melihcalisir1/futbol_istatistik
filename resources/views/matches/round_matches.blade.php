@@ -1,10 +1,10 @@
+<!-- resources/views/matches/round_matches.blade.php -->
 <!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $round }} Maçları</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -31,11 +31,9 @@
         </table>
     </div>
     <div class="text-center mt-4">
-        <a href="{{ route('rounds', ['season' => $season, 'league' => $league]) }}" class="btn btn-secondary">Geri Dön</a>
+        <a href="{{ route('rounds.select') }}" class="btn btn-secondary">Geri Dön</a>
     </div>
 </div>
-
-<!-- Bootstrap JS (Optional) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

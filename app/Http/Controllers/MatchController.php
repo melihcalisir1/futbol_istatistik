@@ -7,8 +7,16 @@ use Illuminate\Support\Facades\Http;
 
 class MatchController extends Controller
 {
-    public function getRounds($season, $league)
+    public function selectSeasonAndLeague()
     {
+        return view('matches.index');
+    }
+
+    public function getRounds(Request $request)
+    {
+        $season = $request->input('season');
+        $league = $request->input('league');
+
         $apiUrl = 'https://v3.football.api-sports.io/fixtures/rounds';
         $apiKey = env('API_FOOTBALL_KEY');
 
@@ -21,10 +29,12 @@ class MatchController extends Controller
 
         $rounds = $response->json()['response'];
 
-        // Turları view'e gönderiyoruz
         return view('matches.rounds', compact('rounds', 'season', 'league'));
     }
 
+
+
+    // app/Http/Controllers/MatchController.php
     public function showRoundMatches($season, $league, $round)
     {
         $apiUrl = 'https://v3.football.api-sports.io/fixtures';
@@ -40,9 +50,9 @@ class MatchController extends Controller
 
         $matches = $response->json()['response'];
 
-        // $season ve $league değişkenlerini view'e gönderiyoruz
         return view('matches.round_matches', compact('matches', 'round', 'season', 'league'));
     }
+
 
 
 }
