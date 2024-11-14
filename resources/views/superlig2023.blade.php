@@ -47,9 +47,12 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
+            align-items: center;
+            text-align: center;
         }
 
-        .team {
+        .team, .score {
+            flex: 1;
             font-weight: bold;
             color: #333;
         }
@@ -84,5 +87,3 @@
 @endif
 </body>
 </html>
-gazi
-
