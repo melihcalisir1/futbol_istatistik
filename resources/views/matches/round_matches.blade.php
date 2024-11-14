@@ -15,6 +15,7 @@
             <thead class="table-dark">
             <tr>
                 <th scope="col">Ev Sahibi Takım</th>
+                <th scope="col">Skor</th>
                 <th scope="col">Deplasman Takımı</th>
                 <th scope="col">Tarih</th>
             </tr>
@@ -23,6 +24,9 @@
             @foreach($matches as $match)
                 <tr>
                     <td>{{ $match['teams']['home']['name'] }}</td>
+                    <td class="text-center">
+                        {{ $match['goals']['home'] ?? '-' }} - {{ $match['goals']['away'] ?? '-' }}
+                    </td>
                     <td>{{ $match['teams']['away']['name'] }}</td>
                     <td>{{ \Carbon\Carbon::parse($match['fixture']['date'])->format('d M Y, H:i') }}</td>
                 </tr>
