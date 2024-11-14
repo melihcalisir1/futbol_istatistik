@@ -15,7 +15,9 @@
             <div class="col-md-4 mb-3">
                 <div class="card shadow-sm">
                     <div class="card-body text-center">
-                        <h5 class="card-title">{{ $round }}</h5>
+                        <h5 class="card-title">
+                            {{ str_replace(['Regular Season', 'Relegation Round'], ['Hafta', 'Düşme Turu'], $round) }}
+                        </h5>
                         <a href="{{ route('round.matches', ['season' => $season, 'league' => $league, 'round' => $round]) }}" class="btn btn-primary">
                             Maçları Görüntüle
                         </a>
