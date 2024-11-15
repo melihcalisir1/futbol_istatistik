@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\LiveScoreController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\ScoreController;
@@ -21,3 +22,4 @@ Route::get('/season/{season}/league/{league}/rounds', [MatchController::class, '
 // Belirli bir round'un maçlarını listeleyen route
 Route::get('/season/{season}/league/{league}/round/{round}/matches', [MatchController::class, 'showRoundMatches'])->name('round.matches');
 
+Route::get("/fixtures",[FixtureController::class,"index"])->name("fixtures.index");
