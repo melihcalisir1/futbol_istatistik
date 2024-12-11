@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FixtureController;
+use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\LiveScoreController;
 use App\Http\Controllers\MatchController;
 use App\Http\Controllers\ScoreController;
@@ -30,5 +31,6 @@ Route::get("/fixtures",[FixtureController::class,"index"])->name("fixtures.index
 
 Route::get('/live-matches', [LiveScoreController::class, 'liveMatches']);
 
+Route::get('/league/{leagueId}', [LeagueController::class, 'showLeagueDetails'])->name('league.details');
 
 

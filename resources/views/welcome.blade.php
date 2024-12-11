@@ -19,29 +19,38 @@
             overflow-y: auto;
         }
 
-        .side-menu a {
+        .side-menu .header {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 15px;
             color: #ffffff;
-            text-decoration: none;
-            margin: 8px 0;
+        }
+
+        .side-menu a {
             display: flex;
             align-items: center;
-            font-size: 14px;
+            text-decoration: none;
+            margin: 8px 0;
+            color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .side-menu a img {
-            height: 20px;
-            width: 20px;
+            height: 24px;
+            width: 24px;
             margin-right: 10px;
         }
 
         .side-menu a:hover {
+            background-color: #333333;
             color: #f4a261;
         }
 
-        .side-menu .header {
-            font-weight: bold;
+        .side-menu a span {
             font-size: 14px;
-            margin-bottom: 10px;
+            font-weight: bold;
         }
 
         /* Maç Kartları */
@@ -127,29 +136,27 @@
     <!-- Sol Menü -->
     <div class="side-menu">
         <div class="header">SABİTLENEN LİGLER</div>
-        <a href="#">
+        <a href="{{ route('league.details', ['leagueId' => 78]) }}" class="league-link">
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Bundesliga_logo_%282017%29.svg" alt="Bundesliga">
-            Bundesliga
+            <span>Bundesliga</span>
         </a>
-        <a href="#">
+        <a href="{{ route('league.details', ['leagueId' => 39]) }}" class="league-link">
             <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" alt="Premier League">
-            Premier League
+            <span>Premier League</span>
         </a>
-        <a href="#">
+        <a href="{{ route('league.details', ['leagueId' => 140]) }}" class="league-link">
             <img src="https://upload.wikimedia.org/wikipedia/en/6/63/LaLiga_Santander_logo.svg" alt="La Liga">
-            La Liga
+            <span>La Liga</span>
         </a>
-        <a href="#">
+        <a href="{{ route('league.details', ['leagueId' => 135]) }}" class="league-link">
             <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Serie_A_logo_%282019%29.svg" alt="Serie A">
-            Serie A
+            <span>Serie A</span>
         </a>
-        <a href="#">
+        <a href="{{ route('league.details', ['leagueId' => 203]) }}" class="league-link">
             <img src="https://upload.wikimedia.org/wikipedia/en/b/b5/Super_Lig_logo.svg" alt="Süper Lig">
-            Süper Lig
+            <span>Süper Lig</span>
         </a>
     </div>
-
-
 
     <!-- Ana İçerik -->
     <div class="flex-grow-1">
@@ -169,10 +176,7 @@
         <!-- Maçlar -->
         <div class="container mt-3">
             @forelse($groupedMatches as $league => $matches)
-                <!-- Lig Başlığı -->
                 <div class="league-title">{{ $league }}</div>
-
-                <!-- Lig Maçları -->
                 @foreach($matches as $match)
                     <div class="match-card">
                         <div class="team">
@@ -197,7 +201,6 @@
                 </div>
             @endforelse
         </div>
-
     </div>
 </div>
 
