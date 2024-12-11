@@ -3,86 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Üstte Yatay Menü</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <title>Canlı Maçlar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Navbar Tasarımı */
-        .top-navbar {
-            width: 100%;
-            background-color: #333;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        body {
+            background-color: #121212;
+            color: #ffffff;
         }
 
-        .top-navbar a {
+        /* Sol Menü */
+        .side-menu {
+            background-color: #1c1c1c;
+            padding: 10px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .side-menu a {
+            color: #ffffff;
             text-decoration: none;
-            color: white;
-            text-align: center;
-            transition: all 0.3s ease-in-out;
-            flex: 1;
+            margin: 8px 0;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
         }
 
-        .top-navbar a:hover {
+        .side-menu a img {
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .side-menu a:hover {
             color: #f4a261;
         }
 
-        .top-navbar svg {
-            width: 24px;
-            height: 24px;
-            fill: white;
+        .side-menu .header {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Maç Kartları */
+        .match-card {
+            background-color: #1c1c1c;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .match-card .team {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            flex: 1;
+        }
+
+        .match-card .team img {
+            height: 30px;
+            width: 30px;
             margin-bottom: 5px;
-            transition: fill 0.3s ease-in-out;
         }
 
-        .top-navbar a:hover svg {
-            fill: #f4a261;
+        .match-card .score {
+            color: #f4a261;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .top-navbar b {
+        .match-card .minute {
             font-size: 12px;
-            display: block;
+            color: #888;
+            margin-top: 5px;
         }
 
-        /* İçerik alanı */
-        .content {
-            margin-top: 60px;
-            padding: 20px;
+        /* Üst Menü */
+        .top-menu {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px 15px;
+        }
+
+        .top-menu .filters button {
+            margin-right: 10px;
+            background-color: #444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        .top-menu .filters button.active {
+            background-color: #f4a261;
+            color: black;
+        }
+
+        .top-menu .filters button:hover {
+            background-color: #555;
+        }
+
+        .top-menu .date-picker input {
+            background-color: #1c1c1c;
+            color: white;
+            border: 1px solid #444;
+            padding: 5px;
+            border-radius: 3px;
         }
     </style>
 </head>
 <body>
-<!-- Üst Navbar -->
-<div class="top-navbar">
-    <a href="/fikstur">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M5 3h14v2H5zm0 4h10v2H5zm0 4h14v2H5zm0 4h10v2H5zm0 4h14v2H5z"/>
-        </svg>
-        <b>Fikstür</b>
-    </a>
-    <a href="/puan-durumu">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M3 3h18v2H3zm0 4h12v2H3zm0 4h18v2H3zm0 4h8v2H3z"/>
-        </svg>
-        <b>Puan Durumu</b>
-    </a>
-    <a href="/canli-maclar">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-2.63-.35-4.68-2.4-5.03-5.03H11v5.03zM11 13H6.07c.35-2.63 2.4-4.68 5.03-5.03V13zm0-7.07c-2.5.34-4.47 2.31-4.81 4.81H11V5.93zM13 11h4.81c-.34-2.5-2.31-4.47-4.81-4.81V11zm0 2v5.07c2.5-.34 4.47-2.31 4.81-4.81H13zm0-7.07V5.93h4.81c-.34 2.5-2.31-4.47-4.81-4.81z"/>
-        </svg>
-        <b>Canlı Maçlar</b>
-    </a>
+<div class="d-flex">
+    <!-- Sol Menü -->
+    <div class="side-menu">
+        <div class="header">SABİTLENEN LİGLER</div>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/df/Bundesliga_logo_%282017%29.svg" alt="Bundesliga">
+            Bundesliga
+        </a>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/en/f/f2/Premier_League_Logo.svg" alt="Premier League">
+            Premier League
+        </a>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/en/6/63/LaLiga_Santander_logo.svg" alt="La Liga">
+            La Liga
+        </a>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/en/e/e1/Serie_A_logo_%282019%29.svg" alt="Serie A">
+            Serie A
+        </a>
+        <a href="#">
+            <img src="https://upload.wikimedia.org/wikipedia/en/b/b5/Super_Lig_logo.svg" alt="Süper Lig">
+            Süper Lig
+        </a>
+    </div>
+
+
+
+    <!-- Ana İçerik -->
+    <div class="flex-grow-1">
+        <!-- Üst Menü -->
+        <div class="top-menu">
+            <div class="filters">
+                <button class="active" onclick="filterMatches('all')">Tümü</button>
+                <button onclick="filterMatches('live')">Canlı</button>
+                <button onclick="filterMatches('odds')">Oranlar</button>
+                <button onclick="filterMatches('finished')">Bitmiş</button>
+            </div>
+            <div class="date-picker">
+                <input type="date" class="form-control" value="{{ date('Y-m-d') }}">
+            </div>
+        </div>
+
+        <!-- Maçlar -->
+        <div class="container mt-3">
+            @forelse($groupedMatches as $league => $matches)
+                <!-- Lig Başlığı -->
+                <div class="league-title">{{ $league }}</div>
+
+                <!-- Lig Maçları -->
+                @foreach($matches as $match)
+                    <div class="match-card">
+                        <div class="team">
+                            <img src="{{ $match['teams']['home']['logo'] }}" alt="Home Team">
+                            <span>{{ $match['teams']['home']['name'] }}</span>
+                        </div>
+                        <div class="score">
+                            {{ $match['goals']['home'] ?? '-' }} - {{ $match['goals']['away'] ?? '-' }}
+                            <div class="minute">
+                                {{ $match['fixture']['status']['elapsed'] ?? '0' }}'
+                            </div>
+                        </div>
+                        <div class="team">
+                            <img src="{{ $match['teams']['away']['logo'] }}" alt="Away Team">
+                            <span>{{ $match['teams']['away']['name'] }}</span>
+                        </div>
+                    </div>
+                @endforeach
+            @empty
+                <div class="alert alert-info text-center">
+                    Şu anda canlı maç bulunmamaktadır.
+                </div>
+            @endforelse
+        </div>
+
+    </div>
 </div>
 
-<!-- İçerik -->
-<div class="content">
-    <h1>Hoş Geldiniz</h1>
-    <p>Bu bir yatay üst menü tasarımıdır. Fikstür, Puan Durumu ve Canlı Maçlar sayfalarına bağlantı verebilirsiniz.</p>
-</div>
+<script>
+    function filterMatches(filterType) {
+        console.log(`Filtering matches by: ${filterType}`);
+        // Add filtering logic here
+    }
+</script>
 </body>
 </html>

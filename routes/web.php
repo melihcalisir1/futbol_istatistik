@@ -7,6 +7,7 @@ use App\Http\Controllers\ScoreController;
 use Illuminate\Support\Facades\Route;
 
 
+// Ana Sayfa Canlı Maçlar
 Route::get('/', [LiveScoreController::class, 'showScores']);
 Route::get('/fetch-scores', [LiveScoreController::class, 'fetchScores']);
 Route::get('/superlig-2023', [ScoreController::class, 'showSuperLig2023Scores']);
@@ -23,3 +24,11 @@ Route::get('/season/{season}/league/{league}/rounds', [MatchController::class, '
 Route::get('/season/{season}/league/{league}/round/{round}/matches', [MatchController::class, 'showRoundMatches'])->name('round.matches');
 
 Route::get("/fixtures",[FixtureController::class,"index"])->name("fixtures.index");
+
+
+
+
+Route::get('/live-matches', [LiveScoreController::class, 'liveMatches']);
+
+
+
