@@ -15,6 +15,21 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+        .match-card {
+            background-color: #1c1c1c;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .match-card:hover {
+            background-color: #2a2a2a;
+        }
+        .match-card img {
+            height: 20px;
+            width: 20px;
+            margin-right: 10px;
+        }
         .standings-table table {
             width: 100%;
             color: white;
@@ -38,43 +53,28 @@
     <!-- Puan Durumu -->
     <div>
         <h2 class="section-title">Puan Durumu</h2>
-        @if(!empty($standings))
-            <div class="standings-table">
-                <table>
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Takım</th>
-                        <th>Oynanan</th>
-                        <th>Galibiyet</th>
-                        <th>Beraberlik</th>
-                        <th>Mağlubiyet</th>
-                        <th>Attığı</th>
-                        <th>Yediği</th>
-                        <th>Puan</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($standings as $team)
-                        <tr>
-                            <td>{{ $team['rank'] }}</td>
-                            <td>{{ $team['team']['name'] }}</td>
-                            <td>{{ $team['all']['played'] }}</td>
-                            <td>{{ $team['all']['win'] }}</td>
-                            <td>{{ $team['all']['draw'] }}</td>
-                            <td>{{ $team['all']['lose'] }}</td>
-                            <td>{{ $team['all']['goals']['for'] }}</td>
-                            <td>{{ $team['all']['goals']['against'] }}</td>
-                            <td>{{ $team['points'] }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        @else
-            <div class="alert alert-info">Puan durumu bulunamadı.</div>
-        @endif
+        <div id="wg-api-football-standings"
+             data-host="v3.football.api-sports.io"
+             data-key="{{ env('API_FOOTBALL_KEY') }}"
+             data-league="{{ $leagueId }}"
+             data-season="2021"
+             data-theme=""
+             data-show-errors="false"
+             data-show-logos="true"
+             class="wg_loader">
+        </div>
+        <script
+            type="module"
+            src="https://widgets.api-sports.io/2.0.3/widgets.js">
+        </script>
     </div>
+
+
+    <script
+        type="module"
+        src="https://widgets.api-sports.io/2.0.3/widgets.js">
+    </script>
+</div>
 </div>
 </body>
 </html>
