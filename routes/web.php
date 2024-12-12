@@ -4,7 +4,9 @@ use App\Http\Controllers\FixtureController;
 use App\Http\Controllers\LeagueController;
 use App\Http\Controllers\LiveScoreController;
 use App\Http\Controllers\MatchController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\ScoreController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,5 +34,8 @@ Route::get("/fixtures",[FixtureController::class,"index"])->name("fixtures.index
 Route::get('/', [LiveScoreController::class, 'liveMatches']);
 
 Route::get('/league/{leagueId}', [LeagueController::class, 'showLeagueDetails'])->name('league.details');
+Route::get('/team/{teamId}', [TeamController::class, 'showTeamDetails'])->name('team.details');
 
+
+Route::get('/team/{teamId}/players', [PlayerController::class, 'showTeamPlayers'])->name('team.players');
 

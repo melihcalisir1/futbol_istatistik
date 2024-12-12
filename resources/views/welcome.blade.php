@@ -11,46 +11,69 @@
             color: #ffffff;
         }
 
-        /* Sol Menü */
         .side-menu {
             background-color: #1c1c1c;
-            padding: 10px;
+            padding: 15px;
             height: 100vh;
             overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .side-menu .header {
             font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 15px;
-            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #f4a261;
+            text-align: center;
+            text-transform: uppercase;
         }
 
         .side-menu a {
             display: flex;
             align-items: center;
             text-decoration: none;
-            margin: 8px 0;
+            margin: 10px 0;
             color: #ffffff;
-            padding: 5px;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .side-menu a img {
-            height: 24px;
-            width: 24px;
-            margin-right: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: #2a2a2a;
         }
 
         .side-menu a:hover {
-            background-color: #333333;
-            color: #f4a261;
+            background-color: #f4a261;
+            color: #121212;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .side-menu a img {
+            height: 28px;
+            width: 28px;
+            margin-right: 12px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            padding: 3px;
         }
 
         .side-menu a span {
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        /* Ek Görsel Efekt */
+        .side-menu a::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, #f4a261, #e76f51);
+            transition: width 0.3s ease-in-out;
+            margin-top: 5px;
+        }
+
+        .side-menu a:hover::after {
+            width: 100%;
         }
 
         /* Maç Kartları */
@@ -158,6 +181,7 @@
         </a>
     </div>
 
+
     <!-- Ana İçerik -->
     <div class="flex-grow-1">
         <!-- Üst Menü -->
@@ -174,33 +198,85 @@
         </div>
 
         <!-- Maçlar -->
-        <div class="container mt-3">
-            @forelse($groupedMatches as $league => $matches)
-                <div class="league-title">{{ $league }}</div>
-                @foreach($matches as $match)
-                    <div class="match-card">
-                        <div class="team">
-                            <img src="{{ $match['teams']['home']['logo'] }}" alt="Home Team">
-                            <span>{{ $match['teams']['home']['name'] }}</span>
-                        </div>
-                        <div class="score">
-                            {{ $match['goals']['home'] ?? '-' }} - {{ $match['goals']['away'] ?? '-' }}
-                            <div class="minute">
-                                {{ $match['fixture']['status']['elapsed'] ?? '0' }}'
-                            </div>
-                        </div>
-                        <div class="team">
-                            <img src="{{ $match['teams']['away']['logo'] }}" alt="Away Team">
-                            <span>{{ $match['teams']['away']['name'] }}</span>
-                        </div>
-                    </div>
-                @endforeach
-            @empty
-                <div class="alert alert-info text-center">
-                    Şu anda canlı maç bulunmamaktadır.
-                </div>
-            @endforelse
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Canlı Maçlar</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #121212;
+                    color: #ffffff;
+                }
+                .section-title {
+                    font-size: 24px;
+                    margin: 20px 0;
+                    font-weight: bold;
+                    text-align: center;
+                }
+            </style>
+        </head>
+        <body>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Canlı Maçlar</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                body {
+                    background-color: #121212;
+                    color: #ffffff;
+                }
+                .section-title {
+                    font-size: 24px;
+                    margin: 20px 0;
+                    font-weight: bold;
+                    text-align: center;
+                }
+                .widget-container {
+                    margin-top: 20px;
+                    padding: 20px;
+                    background-color: #1c1c1c;
+                    border-radius: 5px;
+                }
+            </style>
+        </head>
+        <body>
+        <div class="container mt-5">
+
+            <!-- Canlı Maçlar Widget -->
+            <div class="widget-container">
+                <div id="wg-api-football-games"
+                     data-host="v3.football.api-sports.io"
+                     data-key="{{ env('API_FOOTBALL_KEY') }}" <!-- Laravel ENV'den API anahtarı -->
+                data-date="{{ date('Y-m-d') }}" <!-- Bugünün tarihi -->
+                data-league="" <!-- Belirli bir lig id'si yoksa tüm ligler -->
+                data-season="2021" <!-- Mevcut sezon -->
+                data-theme=""
+                data-refresh="15"
+                data-show-toolbar="true"
+                data-show-errors="false"
+                data-show-logos="true"
+                data-modal-game="true"
+                data-modal-standings="true"
+                data-modal-show-logos="true">
+            </div>
+            <script
+                type="module"
+                src="https://widgets.api-sports.io/2.0.3/widgets.js">
+            </script>
         </div>
+    </div>
+</body>
+</html>
+
+</body>
+        </html>
+
     </div>
 </div>
 
