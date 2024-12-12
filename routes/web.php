@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Ana Sayfa Canlı Maçlar
-Route::get('/', [LiveScoreController::class, 'showScores']);
+Route::get('/live', [LiveScoreController::class, 'showScores']);
 Route::get('/fetch-scores', [LiveScoreController::class, 'fetchScores']);
 Route::get('/superlig-2023', [ScoreController::class, 'showSuperLig2023Scores']);
 Route::get('/fetch-superlig-2023', [ScoreController::class, 'fetchSuperLig2023Scores']);
@@ -29,7 +29,7 @@ Route::get("/fixtures",[FixtureController::class,"index"])->name("fixtures.index
 
 
 
-Route::get('/live-matches', [LiveScoreController::class, 'liveMatches']);
+Route::get('/', [LiveScoreController::class, 'liveMatches']);
 
 Route::get('/league/{leagueId}', [LeagueController::class, 'showLeagueDetails'])->name('league.details');
 
